@@ -1,154 +1,62 @@
-# 📚 API de Cadastro de Professores e Disciplinas
+# API Professores e Disciplinas
 
-Este projeto expõe uma API REST para gerenciar professores, disciplinas e o relacionamento entre eles.
+API para gerenciar professores, disciplinas e associações.
 
-## ▶️ Execução
+## Como usar
 
-Certifique-se de que o backend está rodando localmente na porta `3000`.
+Servidor rodando na porta 3000. Use JSON nas requisições.
 
-## 🔐 Informações Sensíveis
+## Endpoints e exemplos de uso com curl
 
-Os exemplos abaixo utilizam dados fictícios ou anonimizados para proteção de informações pessoais como CPF e e-mail.
+**Cadastrar professor**  
+curl -X POST http://localhost:3000/professor -H "Content-Type: application/json" -d "{"nome":"Henrique Louro","email":"henrique.louro@fatec.sp.gov.br","cpf":"07494812857"}"
 
-## 📦 Endpoints
+markdown
+Copiar
+Editar
 
-### ➕ Criar Professor
+**Listar professores**  
+curl -X GET http://localhost:3000/professor
 
-**POST /professor**
+markdown
+Copiar
+Editar
 
-Headers:  
-Content-Type: application/json
+**Atualizar professor**  
+curl -X PUT http://localhost:3000/professor -H "Content-Type: application/json" -d "{"id":"ID_DO_PROFESSOR","nome":"Juliana Mendes","email":"juliana.mendes@fatec.sp.gov.br","cpf":"32082128016"}"
 
-Body:
-```json
-{
-  "nome": "Henrique Louro",
-  "email": "henrique.louro@fatec.sp.gov.br",
-  "cpf": "07494812857"
-}
-```
+markdown
+Copiar
+Editar
 
-Respostas comuns:
-- ✅ 200: Professor cadastrado com sucesso  
-- ❌ 400: CPF ou e-mail já em uso / CPF inválido / E-mail inválido
+**Excluir professor**  
+curl -X DELETE http://localhost:3000/professor -H "Content-Type: application/json" -d "{"id":"ID_DO_PROFESSOR"}"
 
-### 📋 Listar Professores
+markdown
+Copiar
+Editar
 
-**GET /professor**
+**Cadastrar disciplina**  
+curl -X POST http://localhost:3000/disciplina -H "Content-Type: application/json" -d "{"descricao":"Técnicas de Programação II"}"
 
-Resposta:
-```json
-[
-  {
-    "_id": "6838fa1318bc4405f1a662e5",
-    "nome": "Henrique Louro",
-    "email": "henrique.louro@fatec.sp.gov.br",
-    "cpf": "07494812857"
-  },
-  {
-    "_id": "6838fa5918bc4405f1a662e7",
-    "nome": "Roberto Lima",
-    "email": "carlos.silva@fatec.sp.gov.br",
-    "cpf": "63479695051"
-  }
-]
-```
+markdown
+Copiar
+Editar
 
-### ✏️ Atualizar Professor
+**Listar disciplinas**  
+curl -X GET http://localhost:3000/disciplina
 
-**PUT /professor**
+markdown
+Copiar
+Editar
 
-Headers:  
-Content-Type: application/json
+**Associar professor e disciplina**  
+curl -X POST http://localhost:3000/professor_has_disciplina -H "Content-Type: application/json" -d "{"professor":"ID_DO_PROFESSOR","disciplina":"ID_DA_DISCIPLINA"}"
 
-Body:
-```json
-{
-  "id": "6838fa6d18bc4405f1a662e9",
-  "nome": "Juliana Mendes",
-  "email": "odetinha.roitman@fatec.sp.gov.br",
-  "cpf": "32082128016"
-}
-```
+bash
+Copiar
+Editar
 
-### ❌ Remover Professor
+## Observação
 
-**DELETE /professor**
-
-Headers:  
-Content-Type: application/json
-
-Body:
-```json
-{
-  "id": "6838fa6d18bc4405f1a662e9"
-}
-```
-
-## 📚 Disciplinas
-
-### ➕ Criar Disciplina
-
-**POST /disciplina**
-
-Headers:  
-Content-Type: application/json
-
-Body:
-```json
-{
-  "descricao": "Técnicas de Programação II"
-}
-```
-
-e
-
-```json
-{
-  "descricao": "Lógica de Programação"
-}
-```
-
-### 📋 Listar Disciplinas
-
-**GET /disciplina**
-
-Resposta:
-```json
-[
-  {
-    "_id": "6838fbf418bc4405f1a662f4",
-    "descricao": "Técnicas de Programação II"
-  },
-  {
-    "_id": "6838fc0d18bc4405f1a662f6",
-    "descricao": "Lógica de Programação"
-  }
-]
-```
-
-## 🔗 Relacionamento Professor–Disciplina
-
-### ➕ Associar Professor a Disciplina
-
-**POST /professor_has_disciplina**
-
-Headers:  
-Content-Type: application/json
-
-Body:
-```json
-{
-  "professor": "6838fa1318bc4405f1a662e5",
-  "disciplina": "6838fbf418bc4405f1a662f4"
-}
-```
-
-e
-
-```json
-{
-  "professor": "6838fa5918bc4405f1a662e7",
-  "disciplina": "6838fc0d18bc4405f1a662f6"
-}
-```
+Projeto feito por aluno do 3º semestre da FATEC.
