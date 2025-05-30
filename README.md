@@ -152,19 +152,3 @@ e
   "disciplina": "6838fc0d18bc4405f1a662f6"
 }
 ```
-
-## 📄 Observações
-
-- A API valida CPF e e-mail antes de permitir o cadastro.  
-- Professores não podem ser duplicados com mesmo CPF ou e-mail.  
-- Os relacionamentos entre professores e disciplinas são salvos separadamente.
-
-## 👩‍💻 Desenvolvido para fins acadêmicos
-
-Este projeto foi criado para prática em disciplinas de Desenvolvimento Web.
-## 📚 Referências
-
-- [Documentação do Mongoose](https://mongoosejs.com/)
-- [Express.js](https://expressjs.com/)
-- [Validador de CPF](https://www.geradorcpf.com/algoritmo_do_cpf.htm)
-- [Repositório do professor](https://github.com/hdblouro/escola)
