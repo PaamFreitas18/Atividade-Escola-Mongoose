@@ -1,139 +1,167 @@
-# 🏫 Atividade - Escola Mongoose
+# 📚 API de Cadastro de Professores e Disciplinas
 
-**Disciplina:** Técnicas de Programação II  
-**Professor:** Henrique Louro  
-**Aluno:** Pamela Freitas
+Este projeto expõe uma API REST para gerenciar professores, disciplinas e o relacionamento entre eles.
 
-## 🔗 Repositório da Atividade
-Este é o repositório público da atividade prática com Express, TypeScript e Mongoose:  
-📁 [https://github.com/PaamFreitas18](https://github.com/PaamFreitas18)
+## ▶️ Execução
 
+Certifique-se de que o backend está rodando localmente na porta `3000`.
 
-## 🧪 Testes com `curl` e Respostas
+## 🔐 Informações Sensíveis
 
-### 1. ➕ Cadastro de Professor
-```bash
-curl -X POST http://localhost:3001/professor \
-  -H "Content-Type: application/json" \
-  -d '{"nome": "Henrique Louro", "email": "henrique.louro@fatec.sp.gov.br", "cpf": "07494812857"}'
-```
-**Resposta:**
+Os exemplos abaixo utilizam dados fictícios ou anonimizados para proteção de informações pessoais como CPF e e-mail.
+
+## 📦 Endpoints
+
+### ➕ Criar Professor
+
+**POST /professor**
+
+Headers:  
+Content-Type: application/json
+
+Body:
 ```json
 {
   "nome": "Henrique Louro",
   "email": "henrique.louro@fatec.sp.gov.br",
-  "cpf": "07494812857",
-  "_id": "682f6384f4bd0fb518a18a28",
-  "__v": 0
+  "cpf": "07494812857"
 }
 ```
 
-### 2. ❌ Validação de CPF Inválido
-```bash
-curl -X POST http://localhost:3001/professor \
-  -H "Content-Type: application/json" \
-  -d '{"nome": "Fulano", "email": "fulano@teste.com", "cpf": "12345678910"}'
-```
-**Resposta:**
-```json
-{
-  "message": "12345678910 não é um CPF válido"
-}
-```
+Respostas comuns:
+- ✅ 200: Professor cadastrado com sucesso  
+- ❌ 400: CPF ou e-mail já em uso / CPF inválido / E-mail inválido
 
-### 3. ❌ Validação de E-mail Inválido
-```bash
-curl -X POST http://localhost:3001/professor \
-  -H "Content-Type: application/json" \
-  -d '{"nome": "Fulano", "email": "fulano@teste", "cpf": "07494812857"}'
-```
-**Resposta:**
-```json
-{
-  "message": "fulano@teste não é um formato de e-mail válido"
-}
-```
+### 📋 Listar Professores
 
-### 4. 🔍 Listar Professores
-```bash
-curl -X GET http://localhost:3001/professor
-```
-**Resposta:**
+**GET /professor**
+
+Resposta:
 ```json
 [
   {
-    "_id": "682f6384f4bd0fb518a18a28",
+    "_id": "6838fa1318bc4405f1a662e5",
     "nome": "Henrique Louro",
     "email": "henrique.louro@fatec.sp.gov.br",
-    "cpf": "07494812857",
-    "__v": 0
+    "cpf": "07494812857"
+  },
+  {
+    "_id": "6838fa5918bc4405f1a662e7",
+    "nome": "Roberto Lima",
+    "email": "carlos.silva@fatec.sp.gov.br",
+    "cpf": "63479695051"
   }
 ]
 ```
 
-### 5. 📝 Atualizar Professor
-```bash
-curl -X PUT http://localhost:3001/professor \
-  -H "Content-Type: application/json" \
-  -d '{"id":"682f6384f4bd0fb518a18a28", "nome":"Henrique Atualizado", "email":"henrique@fatec.sp.gov.br", "cpf":"07494812857"}'
-```
-**Resposta:**
+### ✏️ Atualizar Professor
+
+**PUT /professor**
+
+Headers:  
+Content-Type: application/json
+
+Body:
 ```json
 {
-  "_id": "682f6384f4bd0fb518a18a28",
-  "nome": "Henrique Atualizado",
-  "email": "henrique@fatec.sp.gov.br",
-  "cpf": "07494812857",
-  "__v": 0
+  "id": "6838fa6d18bc4405f1a662e9",
+  "nome": "Juliana Mendes",
+  "email": "odetinha.roitman@fatec.sp.gov.br",
+  "cpf": "32082128016"
 }
 ```
 
-### 6. 🗑️ Excluir Professor
-```bash
-curl -X DELETE http://localhost:3001/professor \
-  -H "Content-Type: application/json" \
-  -d '{"id":"682f6384f4bd0fb518a18a28"}'
-```
-**Resposta:**
+### ❌ Remover Professor
+
+**DELETE /professor**
+
+Headers:  
+Content-Type: application/json
+
+Body:
 ```json
 {
-  "message": "Professor excluído com sucesso"
+  "id": "6838fa6d18bc4405f1a662e9"
 }
 ```
 
-### 7. ➕ Cadastro de Disciplina
-```bash
-curl -X POST http://localhost:3001/disciplina \
-  -H "Content-Type: application/json" \
-  -d '{"descricao": "Lógica de Programação"}'
-```
-**Resposta:**
+## 📚 Disciplinas
+
+### ➕ Criar Disciplina
+
+**POST /disciplina**
+
+Headers:  
+Content-Type: application/json
+
+Body:
 ```json
 {
-  "descricao": "Lógica de Programação",
-  "_id": "682f6dbdf4bd0fb518a18a3e",
-  "__v": 0
+  "descricao": "Técnicas de Programação II"
 }
 ```
 
-### 8. 🔗 Associação Professor–Disciplina
-```bash
-curl -X POST http://localhost:3001/professor_has_disciplina \
-  -H "Content-Type: application/json" \
-  -d '{"professor": "682f6384f4bd0fb518a18a28", "disciplina": "682f6dbdf4bd0fb518a18a3e"}'
-```
-**Resposta:**
+e
+
 ```json
 {
-  "professor": "682f6384f4bd0fb518a18a28",
-  "disciplina": "682f6dbdf4bd0fb518a18a3e",
-  "_id": "682f78b5f4bd0fb518a18a43",
-  "__v": 0
+  "descricao": "Lógica de Programação"
 }
 ```
 
----
+### 📋 Listar Disciplinas
 
+**GET /disciplina**
+
+Resposta:
+```json
+[
+  {
+    "_id": "6838fbf418bc4405f1a662f4",
+    "descricao": "Técnicas de Programação II"
+  },
+  {
+    "_id": "6838fc0d18bc4405f1a662f6",
+    "descricao": "Lógica de Programação"
+  }
+]
+```
+
+## 🔗 Relacionamento Professor–Disciplina
+
+### ➕ Associar Professor a Disciplina
+
+**POST /professor_has_disciplina**
+
+Headers:  
+Content-Type: application/json
+
+Body:
+```json
+{
+  "professor": "6838fa1318bc4405f1a662e5",
+  "disciplina": "6838fbf418bc4405f1a662f4"
+}
+```
+
+e
+
+```json
+{
+  "professor": "6838fa5918bc4405f1a662e7",
+  "disciplina": "6838fc0d18bc4405f1a662f6"
+}
+```
+
+## 📄 Observações
+
+- A API valida CPF e e-mail antes de permitir o cadastro.  
+- Professores não podem ser duplicados com mesmo CPF ou e-mail.  
+- Os relacionamentos entre professores e disciplinas são salvos separadamente.
+
+## 👩‍💻 Desenvolvido para fins acadêmicos
+
+Este projeto foi criado para prática em disciplinas de Desenvolvimento Web.
 ## 📚 Referências
 
 - [Documentação do Mongoose](https://mongoosejs.com/)
